@@ -1,10 +1,12 @@
 package com.example.tringuyen.project2;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -63,9 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
                 mCursor.moveToPosition(position);
 
-                TextView textView = findViewById(R.id.textView);
                 String tempPos = Integer.toString(position);
-                textView.setText(((TextView) view).getText()+ " Hello: "+ mCursor.getString( mCursor.getColumnIndex(WORKOUT_WEIGHT)));
 
                 String workoutID = mCursor.getString(mCursor.getColumnIndex(_ID));
                 String workoutWeight = mCursor.getString( mCursor.getColumnIndex(WORKOUT_WEIGHT));
@@ -127,22 +127,45 @@ public class MainActivity extends AppCompatActivity {
         builder.setNegativeButton("Cancel", null);
         actions = builder.create();
 
+    }
 
+
+    private class LoadNewLists extends AsyncTask<Void, Void, Cursor>{
+        @Override
+        protected Cursor doInBackground(Void... params){
+            db = dbHelper.getWritableDatabase();
+            mCursor = db.query(dbHelper.NAME, all_columns, null, null, null, null,
+                    null);
+            return mCursor;
+        }
+
+        @Override
+        protected void onPostExecute(Cursor result){
+            super.onPostExecute(result);
+            myAdapter = new SimpleCursorAdapter(MainActivity.this,
+                    android.R.layout.simple_list_item_1,
+                    mCursor,
+                    new String[] {WORKOUT_NAME, WORKOUT_WEIGHT, WORKOUT_REPS, WORKOUT_SETS,  WORKOUT_NOTES },
+                    new int[] { android.R.id.text1});
+
+            mlist.setAdapter(myAdapter);
+        }
 
     }
 
     public void onResume(){
         super.onResume();
-        db = dbHelper.getWritableDatabase();
+        new LoadNewLists().execute();
+        /*db = dbHelper.getWritableDatabase();
         mCursor = db.query(dbHelper.NAME, all_columns, null, null, null, null,
                 null);
         myAdapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_1,
                 mCursor,
                 new String[] {WORKOUT_NAME, WORKOUT_WEIGHT, WORKOUT_REPS, WORKOUT_SETS,  WORKOUT_NOTES },
-                new int[] { android.R.id.text1 });
+                new int[] { android.R.id.text1});
 
-        mlist.setAdapter(myAdapter);
+        mlist.setAdapter(myAdapter);*/
 
     }
 
@@ -155,8 +178,9 @@ public class MainActivity extends AppCompatActivity {
     public void addMoreExercise(View v){
         Intent intent = new Intent(this, Main2Activity.class);
         startActivity(intent);
-
     }
+
+
 
 
 }
