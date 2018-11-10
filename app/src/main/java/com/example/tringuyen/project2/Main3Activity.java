@@ -11,8 +11,10 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class Main3Activity extends AppCompatActivity {
@@ -21,7 +23,6 @@ public class Main3Activity extends AppCompatActivity {
     TextView nameText;
     private dataBaseHelper dbHelper = null;
     private SQLiteDatabase db = null;
-
 
     final static String WORKOUT_NAME = "workout_name";
     final static String WORKOUT_WEIGHT = "workout_weight";
@@ -43,6 +44,8 @@ public class Main3Activity extends AppCompatActivity {
         final String reps = intent.getStringExtra(MainActivity.WORKOUT_REPS_INTENT_1);
         final String notes = intent.getStringExtra(MainActivity.WORKOUT_NOTES_INTENT_1);
         final String idString = intent.getStringExtra(MainActivity.WORKOUT_ID_INTENT_1);
+
+
 
         id = idString;
 

@@ -39,7 +39,6 @@ public class Main2Activity extends AppCompatActivity {
         repsEdit = findViewById(R.id.RepsEditText);
         setsEdit = findViewById(R.id.SetsEditText);
         notesEdit = findViewById(R.id.NotesEditText);
-
     }
 
     public void addMoreExercise(View v){

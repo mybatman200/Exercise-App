@@ -59,14 +59,14 @@ public class MainActivity extends AppCompatActivity {
 
         mlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "Touched " + ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Touched " + ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
                 Object temp = myAdapter.getItem(position);
                 String tempView = ((TextView) view).getText().toString();
 
                 mCursor.moveToPosition(position);
 
                 String tempPos = Integer.toString(position);
-
+                //get values from database
                 String workoutID = mCursor.getString(mCursor.getColumnIndex(_ID));
                 String workoutWeight = mCursor.getString( mCursor.getColumnIndex(WORKOUT_WEIGHT));
                 String workoutReps =  mCursor.getString( mCursor.getColumnIndex(WORKOUT_REPS));
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
         mlist.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "Long touched " + id, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Long touched " + id, Toast.LENGTH_SHORT).show();
 
                 String tempString = ((TextView) view).getText().toString();
                 longClickString = Long.toString(id);

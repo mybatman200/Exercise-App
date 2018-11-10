@@ -49,6 +49,14 @@ public class dataBaseHelper extends SQLiteOpenHelper {
         values1.put(WORKOUT_NOTES, "3 4 5 6 7");
         db.insert(NAME,null,values1);
 
+        ContentValues values2 = new ContentValues();
+
+        values2.put(WORKOUT_NAME, "Bicep curls");
+        values2.put(WORKOUT_WEIGHT, "5");
+        values2.put(WORKOUT_REPS, "15");
+        values2.put(WORKOUT_SETS, "2");
+        values2.put(WORKOUT_NOTES, "3 4 5 6 7");
+        db.insert(NAME,null,values2);
 
     }
 
